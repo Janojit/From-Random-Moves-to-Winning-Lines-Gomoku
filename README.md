@@ -27,6 +27,7 @@ This repository contains **complete implementations**, **training scripts**, **c
 gomoku_drl/
 │
 ├── env/                # Gym-style Gomoku environment
+│   ├── __init__.py
 │   └── gomoku_env.py
 │
 ├── agents/             # DRL agents
