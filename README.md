@@ -1,100 +1,103 @@
-# 🧠 **From Random Moves to Winning Lines: DRL for Gomoku**
+# 🧠 From Random Moves to Winning Lines
+
+## Deep Reinforcement Learning for Gomoku
 
 **Team Name:** NashCraft
-**Members:**
+**Program:** MSc Big Data Analytics, RKMVERI
 
-* Janojit Chakraborty (B2430050)
-* Radheshyam Routh (B2430053)
+**Team Members:**
+
+* **Janojit Chakraborty** (B2430050)
+* **Radheshyam Routh** (B2430053)
 
 ---
 
 ## 📌 Project Overview
 
-This project explores **Deep Reinforcement Learning (DRL)** in a competitive, zero-sum board game environment—**Gomoku (Five-in-a-Row)**.
+This project investigates how **Deep Reinforcement Learning (DRL)** combined with **self-play** can learn strategic behavior in a **competitive, zero-sum board game**—**Gomoku (Five-in-a-Row)**.
 
-The project is divided into **two major components**:
+The repository is organized into **two distinct components**, each addressing different academic objectives:
 
-1. **Component-1:** Applying and comparing multiple DRL algorithms in a moderately difficult Gym-style environment using self-play.
-2. **Component-2:** Designing a custom Gomoku environment with a graphical user interface (GUI) for interactive demonstration.
+### 🔹 Component-1: Algorithmic Comparison
 
-This repository contains **complete implementations**, **training scripts**, **comparative evaluation tools**, and a **visual GUI**.
+* Gym-style Gomoku environment
+* Multiple DRL algorithms trained via self-play
+* Quantitative comparison of learning stability and performance
+
+### 🔹 Component-2: Custom Environment & Explainable AI
+
+* Gomoku environment built from scratch (no Gym dependency)
+* Policy-gradient agent trained offline
+* Interactive GUI with **explainable decision heatmaps**
 
 ---
 
 ## 🗂️ Repository Structure
 
 ```
-gomoku_drl/
+From-Random-Moves-to-Winning-Lines-Gomoku/
 │
-├── env/                # Gym-style Gomoku environment
-│   ├── __init__.py
-│   └── gomoku_env.py
+├── component1/                 # Algorithm comparison (Gym-style)
+│   ├── env/                    # Gomoku Gym environment
+│   ├── agents/                 # DRL agents (DQN, PPO, A2C, etc.)
+│   ├── train/                  # Training scripts (self-play)
+│   ├── eval/                   # Evaluation & comparison tools
+│   ├── gui/                    # Gomoku GUI
+│   ├── utils/                  # Shared utilities
+│   └── requirements.txt
 │
-├── agents/             # DRL agents
-│   ├── __init__.py
-│   ├── dqn.py
-│   ├── double_dqn.py
-│   ├── ppo.py
-│   ├── a2c.py
-│   └── reinforce.py
+├── component2/                 # Custom explainable Gomoku system
+│   ├── env.py                  # Custom environment
+│   ├── agent.py                # Policy Gradient agent
+│   ├── train.py                # Offline self-play training
+│   ├── gui.py                  # Explainable GUI (heatmaps)
+│   └── requirements.txt
 │
-├── train/              # Training scripts (self-play)
-│   ├── __init__.py
-│   ├── train_dqn.py
-│   ├── train_double_dqn.py
-│   ├── train_ppo.py
-│   ├── train_a2c.py
-│   └── train_reinforce.py
-│
-├── eval/               # Evaluation & comparison
-│   ├── __init__.py
-│   ├── evaluate.py
-│   ├── compare_models.py
-│   └── analysis.txt
-│
-├── gui/                # Graphical user interface
-│   ├── __init__.py
-│   └── gomoku_gui.py
-│
-├── utils/              # Shared utilities
-│   ├── __init__.py
-│   ├── networks.py
-│   ├── replay_buffer.py
-│   └── helpers.py
-│
-├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## ⚙️ Step-by-Step Instructions
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Janojit/From-Random-Moves-to-Winning-Lines-Gomoku.git
+cd From-Random-Moves-to-Winning-Lines-Gomoku
+```
 
 ---
 
-## 🔹 STEP 1: Environment Setup
+# 🚀 COMPONENT 1
 
-### 1. Create a Python virtual environment
+## DRL Algorithm Comparison in Gomoku
+
+### 🎯 Objective
+
+To **compare multiple DRL algorithms** in a controlled, self-play Gomoku environment and analyze:
+
+* Convergence behavior
+* Stability
+* Strategic emergence
+
+---
+
+## 🔧 Setup (Component-1)
 
 ```bash
+cd component1
 python -m venv gomoku_env
 source gomoku_env/bin/activate     # Linux / macOS
 gomoku_env\Scripts\activate        # Windows
-```
-
-### 2. Install dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-> **Note:** GPU support is automatically enabled if CUDA is available (RTX 3050 Ti).
+> GPU acceleration is automatically enabled if CUDA is available.
 
 ---
 
-## 🔹 STEP 2: Verify the Gomoku Environment
-
-Before training any model, verify the environment logic.
+## 🧪 Verify the Environment
 
 ```bash
 python -m env.gomoku_env
@@ -103,165 +106,167 @@ python -m env.gomoku_env
 Ensure:
 
 * Board initializes correctly
-* Moves are applied properly
-* Win detection works
+* Moves are validated
+* Win detection functions properly
 
 ---
 
-## 🔹 STEP 3: Train DRL Agents (Component-1)
+## 🏋️ Training the Agents (Self-Play)
 
-Each algorithm is trained using **self-play** in the same environment to ensure a fair comparison.
-
-### Recommended training order:
-
-#### 1️⃣ DQN
+Run the following scripts **one at a time**:
 
 ```bash
 python -m train.train_dqn
-```
-
-#### 2️⃣ Double DQN
-
-```bash
 python -m train.train_double_dqn
-```
-
-#### 3️⃣ REINFORCE
-
-```bash
 python -m train.train_reinforce
-```
-
-#### 4️⃣ A2C
-
-```bash
 python -m train.train_a2c
-```
-
-#### 5️⃣ PPO (Main Algorithm)
-
-```bash
 python -m train.train_ppo
 ```
 
-📌 **Output:**
-Trained models are saved as `.pth` files in the project root.
+📌 Trained models are saved as `.pth` files.
 
 ---
 
-## 🔹 STEP 4: Evaluate and Compare Models
+## 📊 Evaluation & Comparison
 
-### 1. Run evaluation matches
+### Run Evaluation
 
 ```bash
 python -m eval.evaluate
 ```
 
-This script:
-
-* Runs fixed evaluation episodes
-* Measures wins, losses, and draws
-* Saves results to disk
-
-### 2. Generate comparison plots
+### Generate Comparison Plots
 
 ```bash
 python -m eval.compare_models
 ```
 
-📊 **Generated Outputs:**
+Generated plots:
 
 * `win_count.png`
 * `loss_count.png`
 * `draw_count.png`
 
-### 3. Play Tournament
+### Tournament Analysis
 
-```
+```bash
 python -m eval.tournament
 ```
 
-This file explains:
+---
 
-* Training stability
-* Algorithmic strengths and weaknesses
-* Self-play behavior differences
+## 🤖 Algorithms Used
+
+| Algorithm  | Category     | Purpose                |
+| ---------- | ------------ | ---------------------- |
+| DQN        | Value-based  | Baseline               |
+| Double-DQN | Value-based  | Bias reduction         |
+| REINFORCE  | Policy-based | Monte-Carlo            |
+| A2C        | Actor-Critic | Faster learning        |
+| PPO        | Policy-based | Stability & robustness |
 
 ---
 
-## 🔹 STEP 5: Launch the GUI (Component-2)
+## 📈 Key Findings (Component-1)
 
-Run the interactive Gomoku interface:
+* Value-based methods struggle under non-stationary self-play
+* Policy-gradient methods are more stable
+* PPO shows the best convergence behavior
+* Strategic play emerges without heuristics
+
+---
+
+# 🎮 COMPONENT 2
+
+## Custom Explainable Gomoku Environment
+
+### 🎯 Objective
+
+To design a **novel, interpretable Gomoku system**, emphasizing:
+
+* Environment design
+* Explainability
+* Human-AI interaction
+
+---
+
+## ✨ Features
+
+* Custom Gomoku environment (no Gym)
+* Policy-Gradient agent trained via self-play
+* GPU-accelerated training
+* Interactive GUI using Pygame
+* **Move-probability heatmaps for explainability**
+* Explicit win / loss / draw feedback
+
+---
+
+## 🔧 Setup (Component-2)
 
 ```bash
-python -m gui.gomoku_gui
+cd ..
+cd component2
+python -m venv gomoku_env
+gomoku_env\Scripts\activate
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install numpy pygame
 ```
 
-### 🎮 Available Modes
+(Optional GPU check)
 
-* **Human vs Human**
-* **Human vs Agent**
-* **Agent vs Agent**
-
-### 🤖 AI Selection
-
-* DQN
-* Double-DQN
-* PPO
-* A2C
-* REINFORCE
-
-The GUI visually displays:
-
-* Game board
-* Player turns
-* Winning condition
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ---
 
-## 🧪 Algorithms Used
+## 🏋️ Training the Agent
 
-| Algorithm  | Type         | Purpose              |
-| ---------- | ------------ | -------------------- |
-| DQN        | Value-based  | Baseline             |
-| Double-DQN | Value-based  | Reduced bias         |
-| REINFORCE  | Policy-based | Monte-Carlo learning |
-| A2C        | Actor-Critic | Faster convergence   |
-| PPO        | Policy-based | Stable & robust      |
+```bash
+python train.py
+```
 
----
-
-## 📈 Evaluation Metrics
-
-* Win rate
-* Loss rate
-* Draw frequency
-* Training stability
-* Convergence behavior
+* Training time: ~3–10 minutes (GPU)
+* Output model: `gomoku_policy.pt`
 
 ---
 
-## 🎯 Key Takeaways
+## 🖥️ Running the GUI
 
-* Value-based methods struggle with non-stationary self-play.
-* Policy-gradient methods (PPO, A2C) show superior stability.
-* Strategic behaviors emerge without handcrafted heuristics.
-* Custom environment + GUI adds originality beyond benchmarks.
+```bash
+python gui.py
+```
+
+### Controls
+
+* **Mouse Click:** Place move
+* **R key:** Reset game
+* **Close Window:** Exit
+
+🎨 The heatmap visualizes the AI’s confidence for every board position.
 
 ---
 
-## 🏁 Conclusion
+## 🎓 Academic Justification
 
-This project demonstrates how **Deep Reinforcement Learning**, combined with **self-play**, can transform random actions into strategic decision-making in competitive board games. The modular design allows easy extension to larger boards or additional algorithms.
+> Training is performed offline using self-play with a policy-gradient method.
+> The GUI is used solely for visualization and interaction, emphasizing interpretability and originality over competitive optimality.
+
+---
+
+## 🏁 Final Conclusion
+
+This project demonstrates how **Deep Reinforcement Learning**, combined with **self-play**, can transform random actions into structured strategy in competitive games.
+By separating **algorithmic benchmarking** and **explainable system design**, the work satisfies both **technical rigor** and **creative originality**.
 
 ---
 
 ## 📬 Contact
 
-For questions or collaboration:
+**Team NashCraft**
+MSc Big Data Analytics
+Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI)
 
-* **Team NashCraft**
-* MSc Big Data Analytics, RKMVERI
 
----
 Just tell me.
